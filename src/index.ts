@@ -11,6 +11,10 @@ interface Position {
   orientation: Orientation;
 }
 
+function isOutOfBound(x: number, y: number, roomSize: RoomSize) {
+  return x < 0 || x >= roomSize.width || y < 0 || y >= roomSize.height;
+}
+
 function robotMover() {
   // get values from cli after verifying logic
   const height = 5;
@@ -46,64 +50,20 @@ function robotMover() {
 
   for (const command of commands) {
     if (command === "L") {
-      console.log("turn left");
-
-      console.log({
-        x: position.x,
-        y: position.y,
-        position: position.orientation,
-      });
-
       position.orientation = leftTurns[position.orientation];
-
-      console.log({
-        x: position.x,
-        y: position.y,
-        position: position.orientation,
-      });
     }
 
     if (command === "R") {
-      console.log("turn right");
-
-      console.log({
-        x: position.y,
-        y: position.y,
-        position: position.orientation,
-      });
       position.orientation = rightTurns[position.orientation];
-
-      console.log({
-        x: position.y,
-        y: position.y,
-        position: position.orientation,
-      });
     }
 
     if (command === "F") {
-      console.log("forward");
-
-      console.log({
-        x: position.y,
-        y: position.y,
-        position: position.orientation,
-      });
-
       const [x, y] = movements[position.orientation];
-      console.log({ movements: [x, y] });
 
       position.x += x;
       position.y += y;
 
-      console.log("after move");
-
-      console.log({
-        x: position.x,
-        y: position.y,
-        position: position.orientation,
-      });
-
-      if (x < 0 || x >= roomSize.width || y < 0 || y >= roomSize.height) {
+      if (isOutOfBound(position.x, position.y, roomSize)) {
         console.log({
           x: position.x,
           y: position.y,
@@ -116,8 +76,10 @@ function robotMover() {
   return {
     x: position.x,
     y: position.y,
-    direction: position.orientation,
+    orientation: position.orientation,
   };
 }
 
-robotMover();
+const position: Position = robotMover();
+
+console.log("result", position);
