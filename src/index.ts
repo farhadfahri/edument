@@ -16,7 +16,6 @@ function isOutOfBound(x: number, y: number, roomSize: RoomSize) {
 }
 
 function robotMover(grid: string, startPos: string, commands: string) {
-  // get values from cli after verifying logic
   const [width, height] = grid;
   const [x, y, orientation] = startPos;
 
@@ -71,24 +70,21 @@ function robotMover(grid: string, startPos: string, commands: string) {
         console.log({
           x: position.x,
           y: position.y,
-
         });
         throw new Error("out of bound error");
       }
     }
   }
 
-  return {
+  console.info({
     x: position.x,
     y: position.y,
     orientation: position.orientation,
-  };
+  });
 }
 
-const testCase1: Position = robotMover("55", "12N", "RFRFFRFRF");
-//const testCase2: Position = robotMover("55", "00E", "RFLFFLRF");
-//const testCase3: Position = robotMover("33", "22N", "FFLFFRF");
+// Uncomment to run test cases
 
-console.log("testCase1", testCase1);
-//console.log("testCase2", testCase2);
-//console.log("testCase3", testCase3);
+//robotMover("55", "12N", "RFRFFRFRF");
+//robotMover("55", "00E", "RFLFFLRF");
+//robotMover("33", "22N", "FFLFFRF");
