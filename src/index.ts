@@ -85,6 +85,6 @@ function robotMover(grid: string, startPos: string, commands: string) {
 
 // Uncomment to run test cases
 
-//robotMover("55", "12N", "RFRFFRFRF");
+robotMover("55", "12N", "RFRFFRFRF");
 //robotMover("55", "00E", "RFLFFLRF");
 //robotMover("33", "22N", "FFLFFRF");
