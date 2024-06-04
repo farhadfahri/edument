@@ -15,16 +15,21 @@ function isOutOfBound(x: number, y: number, roomSize: RoomSize) {
   return x < 0 || x >= roomSize.width || y < 0 || y >= roomSize.height;
 }
 
-function robotMover() {
+function robotMover(grid: string, startPos: string, commands: string) {
   // get values from cli after verifying logic
-  const height = 5;
-  const width = 5;
-  const commands = "RFLFFLRF";
-  const position: Position = { x: 0, y: 0, orientation: "E" };
+  const [width, height] = grid;
+  const [x, y, orientation] = startPos;
 
-  const roomSize: RoomSize = { width, height };
+  const position: Position = {
+    x: parseInt(x),
+    y: parseInt(y),
+    orientation: orientation as Orientation,
+  };
 
-  // left turns
+  const roomSize: RoomSize = {
+    width: parseInt(width),
+    height: parseInt(height),
+  };
 
   const leftTurns: { [key in Orientation]: Orientation } = {
     N: "W",
@@ -33,7 +38,6 @@ function robotMover() {
     E: "N",
   };
 
-  // right turns
   const rightTurns: { [key in Orientation]: Orientation } = {
     N: "E",
     E: "S",
@@ -67,6 +71,7 @@ function robotMover() {
         console.log({
           x: position.x,
           y: position.y,
+
         });
         throw new Error("out of bound error");
       }
@@ -80,6 +85,10 @@ function robotMover() {
   };
 }
 
-const position: Position = robotMover();
+const testCase1: Position = robotMover("55", "12N", "RFRFFRFRF");
+//const testCase2: Position = robotMover("55", "00E", "RFLFFLRF");
+//const testCase3: Position = robotMover("33", "22N", "FFLFFRF");
 
-console.log("result", position);
+console.log("testCase1", testCase1);
+//console.log("testCase2", testCase2);
+//console.log("testCase3", testCase3);
